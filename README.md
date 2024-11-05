@@ -1,7 +1,7 @@
 # shellcode
 Shellcode library as a Go package.
 
-go build github.com/Binject/shellcode
+go build github.com/sanitycheck/binject-shellcode
 
 ./shellcode -a arm -b 32 -o linux
 
