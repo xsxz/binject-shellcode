@@ -137,9 +137,10 @@ func PackIP(ip string) string {
 }
 
 // ApplyPrefixForkIntel64 - Prepends instructions to fork and have the parent jump to a relative 32-bit address (the entryJump argument)
-//							Intel x64 Linux version
 //
-//							Returns the resulting shellcode
+//	Intel x64 Linux version
+//
+//	Returns the resulting shellcode
 func ApplyPrefixForkIntel64(shellcode []byte, entryJump uint32, byteOrder binary.ByteOrder) []byte {
 	/*
 		Disassembly:
@@ -157,10 +158,40 @@ func ApplyPrefixForkIntel64(shellcode []byte, entryJump uint32, byteOrder binary
 	return prefix.Bytes()
 }
 
+func ApplySuffixBranchARM64(shellcode []byte, shellcodeVaddr uint32, entryPoint uint32, byteOrder binary.ByteOrder) []byte {
+	/*
+		Disassembly (ARM64):
+		B <entryJump>
+		Binary encoding of B instruction:
+		Bits [31:26]: 000101 (for B)
+		Bits [25:0]: Signed 26-bit offset, shifted right by 2 (since instructions are 4 bytes aligned)
+	*/
+
+	// Calculate the offset relative to the next instruction (4-byte instruction size)
+	offset := int32(entryPoint) - int32(shellcodeVaddr) - 4
+	// The offset must be shifted right by 2 (due to 4-byte instruction alignment) and fit within 26 bits
+	offset >>= 2
+	if offset < -(1<<25) || offset >= (1<<25) {
+		// The offset is out of range for a 26-bit signed value
+		panic("Branch offset out of range for ARM64 B instruction")
+	}
+
+	// Construct the 32-bit B instruction
+	instruction := uint32(0b000101<<26) | (uint32(offset) & 0x03FFFFFF)
+
+	// Append the constructed instruction to the shellcode
+	buf := bytes.NewBuffer(shellcode)
+	w := bufio.NewWriter(buf)
+	binary.Write(w, byteOrder, instruction)
+	w.Flush()
+	return buf.Bytes()
+}
+
 // ApplySuffixJmpIntel64 - Appends instructions to jump to the original entryPoint (the parameter)
-//							Intel x64 Linux version
 //
-//							Returns the resulting shellcode
+//	Intel x64 Linux version
+//
+//	Returns the resulting shellcode
 func ApplySuffixJmpIntel64(shellcode []byte, shellcodeVaddr uint32, entryPoint uint32, byteOrder binary.ByteOrder) []byte {
 	/*
 		Disassembly:
@@ -177,9 +208,10 @@ func ApplySuffixJmpIntel64(shellcode []byte, shellcodeVaddr uint32, entryPoint u
 }
 
 // ApplySuffixJmpIntel32 - Appends instructions to jump to the original entryPoint (the parameter)
-//							Intel x32 Windows version
 //
-//							Returns the resulting shellcode
+//	Intel x32 Windows version
+//
+//	Returns the resulting shellcode
 func ApplySuffixJmpIntel32(shellcode []byte, shellcodeVaddr uint32, entryPoint uint32, byteOrder binary.ByteOrder) []byte {
 	/*
 		Disassembly:
