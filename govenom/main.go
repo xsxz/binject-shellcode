@@ -4,9 +4,9 @@ import (
 	"flag"
 	"log"
 
-	"github.com/sanitycheck/binject-shellcode/api"
+	"github.com/xsxz/binject-shellcode/api"
 
-	_ "github.com/sanitycheck/binject-shellcode/modules"
+	_ "github.com/xsxz/binject-shellcode/modules"
 )
 
 func main() {

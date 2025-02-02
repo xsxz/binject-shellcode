@@ -1,6 +1,6 @@
 package modules
 
-import "github.com/sanitycheck/binject-shellcode/api"
+import "github.com/xsxz/binject-shellcode/api"
 
 func init() {
 	api.RegisterShellCode(api.Linux, api.Intel32,

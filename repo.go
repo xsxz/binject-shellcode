@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/sanitycheck/binject-shellcode/api"
+	"github.com/xsxz/binject-shellcode/api"
 )
 
 // Repo - Shellcode Repository, directory-backed

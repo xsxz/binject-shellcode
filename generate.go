@@ -3,7 +3,7 @@ package shellcode
 import (
 	"errors"
 
-	"github.com/sanitycheck/binject-shellcode/api"
+	"github.com/xsxz/binject-shellcode/api"
 )
 
 // Generate - makes a shellcode from a registered template module
