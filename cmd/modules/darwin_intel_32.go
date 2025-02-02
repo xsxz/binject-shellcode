@@ -1,6 +1,6 @@
 package modules
 
-import "github.com/xsxz/binject-shellcode/api"
+import "github.com/xsxz/binject-shellcode/cmd/api"
 
 func init() {
 	api.RegisterShellCode(api.Darwin, api.Intel32,

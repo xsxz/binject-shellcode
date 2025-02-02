@@ -3,7 +3,7 @@ package shellcode
 import (
 	"errors"
 
-	"github.com/xsxz/binject-shellcode/api"
+	"github.com/xsxz/binject-shellcode/cmd/api"
 )
 
 // Generate - makes a shellcode from a registered template module

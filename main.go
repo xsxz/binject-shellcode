@@ -4,9 +4,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/xsxz/binject-shellcode/api"
-
-	_ "github.com/xsxz/binject-shellcode/modules"
+	"github.com/xsxz/binject-shellcode/cmd/api"
+	_ "github.com/xsxz/binject-shellcode/cmd/modules"
 )
 
 func main() {

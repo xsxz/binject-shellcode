@@ -33,7 +33,7 @@ func CopyFile(src, dst string) (int64, error) {
 	return nBytes, err
 }
 
-// DirExists - returns true iff a directory exists
+// DirExists - returns true if a directory exists
 func DirExists(dirname string) bool {
 	info, err := os.Stat(dirname)
 	if os.IsNotExist(err) {

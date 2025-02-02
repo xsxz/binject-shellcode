@@ -3,7 +3,7 @@ package modules
 import (
 	"strings"
 
-	"github.com/xsxz/binject-shellcode/api"
+	"github.com/xsxz/binject-shellcode/cmd/api"
 )
 
 func init() {
